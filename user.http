@@ -1,0 +1,12 @@
+GET http://192.168.0.43:3000/users HTTP/1.1
+
+###
+
+POST http://192.168.0.43:3000/users/ HTTP/1.1
+content-type: application/json
+
+{
+    "email": "rafaelwitt292@icloud.com",
+    "name": "wittrafa",
+    "password": "Espanh@2021"
+}
