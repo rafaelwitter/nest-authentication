@@ -2,7 +2,10 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import User from './user.entity';
+// import { User, UserDocument, UserSchema } from './schemas/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
+// import { InjectModel } from '@nestjs/mongoose';
+// import { Model } from 'mongoose';
  
 @Injectable()
 export class UsersService {
@@ -10,14 +13,20 @@ export class UsersService {
     @InjectRepository(User)
     private usersRepository: Repository<User>
   ) {}
+
+  // constructor(
+  //   @InjectModel(User.name)
+  //   private usersRepository: Model<User>
+  // ) {}
  
-  async getById(id: number) {
-    const user = await this.usersRepository.findOne({ id });
-    if (user) {
-      return user;
-    }
-    throw new HttpException('User with this id does not exist', HttpStatus.NOT_FOUND);
-  }
+ 
+  // async getById(id: number) {
+  //   const user = await this.usersRepository.findOne({ id });
+  //   if (user) {
+  //     return user;
+  //   }
+  //   throw new HttpException('User with this id does not exist', HttpStatus.NOT_FOUND);
+  // }
  
   async getByEmail(email: string) {
     const user = await this.usersRepository.findOne({ email });
@@ -29,7 +38,7 @@ export class UsersService {
  
   async create(userData: CreateUserDto) {
     const newUser = await this.usersRepository.create(userData);
-    await this.usersRepository.save(newUser);
+    // await this.usersRepository.save(newUser);
     return newUser;
   }
 
